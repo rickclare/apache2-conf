@@ -116,9 +116,6 @@ LoadModule php5_module        modules/libphp5.so
 LoadModule passenger_module /opt/local/lib/ruby/gems/1.8/gems/passenger-2.2.5/ext/apache2/mod_passenger.so
 PassengerRoot /opt/local/lib/ruby/gems/1.8/gems/passenger-2.2.5
 PassengerRuby /opt/local/bin/ruby
-#LoadModule passenger_module /opt/local/lib/ruby1.9/gems/1.9.1/gems/passenger-2.2.9/ext/apache2/mod_passenger.so
-#PassengerRoot /opt/local/lib/ruby1.9/gems/1.9.1/gems/passenger-2.2.9
-#PassengerRuby /opt/local/bin/ruby1.9
 
 <IfModule !mpm_netware_module>
 <IfModule !mpm_winnt_module>
@@ -500,3 +497,14 @@ Include conf/extra/httpd-vhosts.conf
 SSLRandomSeed startup builtin
 SSLRandomSeed connect builtin
 </IfModule>
+
+# Uncomment following lines to enable Compression (GZIP) of shown content-types 
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/xhtml+xml application/javascript
+
+# enable expirations
+ExpiresActive On
+
+# far future expires headers
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+  ExpiresDefault "access plus 10 years"
+</FilesMatch>
